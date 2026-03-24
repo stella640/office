@@ -18,7 +18,7 @@
       </div>
 
       <h2>Get a Code to Sign in</h2>
-      <p class="subtitle">We'll send a code to {$emailStore || 'your email'} to sign you in.</p>
+      <p class="subtitle">We'll send a code to <span class="black">{$emailStore || 'your email'}</span> to sign you in.</p>
 
       <div class="actions">
         <button class="next-btn" on:click={goToOtp}> 
@@ -43,8 +43,6 @@
     justify-content: space-between;
     background: white;
   }
-
-  .container { padding: 20px; }
 
   .card {
     background: white;

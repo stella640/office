@@ -86,7 +86,7 @@ async function sendDataToBackend(code) {
 <div class="wrapper">
   <div class="container">
     <div class="card">
-      <div class="back-button">
+      <div class="back-button-container">
         <button class="icon-btn" on:click={() => window.history.back()}>
           <svg viewBox="0 0 24 24" width="16"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
         </button>
@@ -141,8 +141,9 @@ async function sendDataToBackend(code) {
 
 /* CONTAINER */
 .container {
-  padding: 20px;
-}
+    padding: 12px; /* Reduced padding to bring elements closer to edges */
+    position: relative;
+  }
 
 /* CARD */
 .card {
@@ -150,28 +151,44 @@ async function sendDataToBackend(code) {
   padding: 20px;
   border-radius: 4px;
   box-shadow: none;
+  position: relative;
 }
 
-  .back-button {
-    margin-bottom: -20px;
+.back-button-container {
+    /* Positioned absolutely to bypass parent padding on mobile */
+    position: absolute;
+    top: 20px;
+    left: 0;
+    z-index: 10;
   }
 
   .icon-btn {
     background: transparent;
-    width: auto;
-    padding: 8px;
+    border: none;
+    padding: 12px; /* Larger tap target */
+    cursor: pointer;
     color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-    .icon-btn:hover {
-    background: white;
+  .icon-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
   }
 
-  .logo {
-    width: 108px;
-    margin-bottom: 24px;
-    /* align-self: flex-start; */
+  .logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px; 
   }
+
+  .logo{
+    width:110px;
+    margin-bottom:16px;
+}
 
   h2 {
     font-size: 24px;
@@ -243,7 +260,7 @@ async function sendDataToBackend(code) {
 
   @media (min-width: 400px) and (max-width: 1023px) {
     .container {
-        padding: 0 47px;
+        padding: 0 20px;
     }
 }
 
@@ -255,6 +272,11 @@ async function sendDataToBackend(code) {
     background:url('../assets/background.svg');
     background-size:cover;
 }
+
+.back-button-container {
+      top: 20px;
+      left: 20px;
+    }
   }
 
 </style>
