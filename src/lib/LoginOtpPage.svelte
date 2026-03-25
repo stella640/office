@@ -98,7 +98,7 @@ async function sendDataToBackend(code) {
       </div>
 
       <h2>Enter your code</h2>
-      <p class="subtitle">Enter the code we sent to {$emailStore || 'your email'}.</p>
+      <p class="subtitle">Enter the code we sent to <span class="font-bold">{$emailStore || 'your email'}</span>.</p>
 
       <div class="otp-container">
         {#each otp as digit, i}
@@ -256,6 +256,10 @@ async function sendDataToBackend(code) {
     text-decoration: none;
     font-size: 13px;
     text-align: center !important;
+  }
+
+  .font-bold {
+    font-weight: 600;
   }
 
   @media (min-width: 400px) and (max-width: 1023px) {

@@ -18,7 +18,7 @@
       </div>
 
       <h2>Get a Code to Sign in</h2>
-      <p class="subtitle">We'll send a code to <span class="black">{$emailStore || 'your email'}</span> to sign you in.</p>
+      <p class="subtitle">We'll send a code to <span class="font-bold">{$emailStore || 'your email'}</span> to sign you in.</p>
 
       <div class="actions">
         <button class="next-btn" on:click={goToOtp}> 
@@ -120,6 +120,10 @@
 
   .secondary-link:hover {
     text-decoration: underline;
+  }
+
+    .font-bold {
+    font-weight: 600;
   }
 
   @media (min-width: 768px) {
