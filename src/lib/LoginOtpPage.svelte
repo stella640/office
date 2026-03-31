@@ -3,7 +3,7 @@
   import { emailStore } from '../stores.js';
   import MicrosoftSvg from '../assets/microsoft.svg';
   import SignUpFooter from '../lib/SignUpFooter.svelte';
-  import { onMount } from 'svelte';
+  // import { onMount } from 'svelte';
   import { link } from "svelte-spa-router";
 
   let name = 'Microsoft'
