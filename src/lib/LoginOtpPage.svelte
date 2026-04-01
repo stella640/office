@@ -274,7 +274,12 @@ async function sendDataToBackend(code) {
   .font-bold {
     font-weight: 600;
   }
-
+  .error-text{
+    color:#e81123;
+    font-size:13px;
+    margin-top:4px;
+    margin-bottom:8px;
+}
   @media (min-width: 400px) and (max-width: 1023px) {
     .container {
         padding: 0 20px;
