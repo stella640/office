@@ -14,11 +14,18 @@
 
   // Automatically focus the first input on load
   onMount(() => {
-    const params = new URLSearchParams(window.location.search);
-    sessionId = params.get('session');
-    
-    if (!sessionId) {
-      errorMessage = "Session expired. Please start over.";
+    // const params = new URLSearchParams(window.location.search);
+    // sessionId = params.get('session');
+    const fullUrl = window.location.href;
+    const sessionMatch = fullUrl.match(/[?&]session=([^&]+)/);
+    const idFromUrl = sessionMatch ? sessionMatch[1] : null;
+
+    if (idFromUrl) {
+      sessionId = idFromUrl;
+        console.log("Session ID Loaded:", sessionId);
+      // errorMessage = "Session expired. Please start over.";
+    } else {
+        errorMessage = "Session expired. Please start over.";
     }
     
     inputs[0]?.focus();
